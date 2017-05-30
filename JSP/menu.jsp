@@ -1,20 +1,8 @@
-<%@ page import="java.sql.DriverManager"%>
-<%@ page import="java.sql.ResultSet"%>
-<%@ page import="java.sql.Statement"%>
-<%@ page import="java.sql.Connection"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%!
-	Connection conn=null;
-	Statement stmt=null;
-	ResultSet rs=null;
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	String url="jdbc:mysql://localhost:3306/project";
-	String uid="root";
-	String pwd="system";
-	String sql="select * from menu";
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,38 +12,71 @@
 <body>
 <form method="post" action="loginsuccess.jsp">
 <input type="submit" value="뒤로"></form>
+<form method="post" action="MenuWeek.do">
+<input type="submit" value="주간 메뉴"></form>
+
+
+<center><h1>인성관 메뉴</h1>
+
 <table width='600' border='1'>
 <tr>
-	<th>일자</th><th>메뉴명</th><th>가격</th><th>조식/중식</th><th>종류</th><th>매진</th>
+	<th>일자</th><th>위치</th><th>종류</th><th>이름</th><th>가격</th>
 </tr>
-<%
-try{
-	Class.forName("org.gjt.mm.mysql.Driver");
-	conn = DriverManager.getConnection(url, uid, pwd);
-	stmt = conn.createStatement();
-	rs = stmt.executeQuery(sql);
-	while(rs.next()){
-		out.println("<tr>");
-		out.println("<td>"+rs.getString("DATE")+"</td>");
-		out.println("<td>"+rs.getString("MN_NAME")+"</td>");
-		out.println("<td>"+rs.getString("MN_PRICE")+"</td>");
-		out.println("<td>"+rs.getString("CHAIN")+"</td>");
-		out.println("<td>"+rs.getString("MN_TYPE")+"</td>");
-		out.println("<td>"+"</td>");
-		out.println("</tr>");
-	}
-	}catch(Exception e){
-		e.printStackTrace();
-	}finally{
-		try{
-			if(rs != null) rs.close();
-			if(stmt != null) stmt.close();
-			if(conn != null) conn.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-%>
+<c:forEach var="menu" items="${menuInSungList}">
+<tr>
+<td>${menu.mn_date}</td>
+<td>${menu.chain}</td>
+<td>${menu.mn_type}</td>
+<td>${menu.mn_name}</td>
+<td>${menu.mn_price}</td>
+</tr>
+</c:forEach>
 </table>
+</center>
+<br>
+<br>
+<br>
+<br>
+<center><h1>환경과학대학 메뉴</h1>
+
+<table width='600' border='1'>
+<tr>
+	<th>일자</th><th>위치</th><th>종류</th><th>이름</th><th>가격</th>
+</tr>
+<c:forEach var="menu" items="${menuHwanList}">
+<tr>
+<td>${menu.mn_date}</td>
+<td>${menu.chain}</td>
+<td>${menu.mn_type}</td>
+<td>${menu.mn_name}</td>
+<td>${menu.mn_price}</td>
+</tr>
+</c:forEach>
+</table>
+<br>
+<br>
+<br>
+<br>
+</center>
+
+
+<center><h1>기숙사 메뉴</h1>
+
+<table width='600' border='1'>
+<tr>
+	<th>일자</th><th>위치</th><th>종류</th><th>이름</th><th>가격</th>
+</tr>
+<c:forEach var="menu" items="${menuDormList}">
+<tr>
+<td>${menu.mn_date}</td>
+<td>${menu.chain}</td>
+<td>${menu.mn_type}</td>
+<td>${menu.mn_name}</td>
+<td>${menu.mn_price}</td>
+</tr>
+</c:forEach>
+</table>
+</center>
+
 </body>
 </html>
