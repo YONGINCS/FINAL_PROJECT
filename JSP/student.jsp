@@ -15,21 +15,30 @@
 <form method="post" action="loginsuccess.jsp">
 <input type="submit" value="뒤로"></form><br><br>
 <table cellpadding="20px" style="position:relative; left: 150px; top:20px;">
-	<tr>
-		<td>이름 : </td>
-		<td>${loginUser.stu_name }</td>
-	</tr>
-	<tr>
-		<td>학번 : </td>
-		<td>${loginUser.stu_id }</td>
-	</tr>
-	<tr>
-		<td>잔액 : </td>
-		<td>${loginUser.stu_change }</td>
-	</tr>
+<tr>
+	<td>이름 : </td>
+	<td>${loginUser.stu_name }</td>
+</tr>
+<tr>
+	<td>학번 : </td>
+	<td>${loginUser.stu_id }</td>
+</tr>
+<tr>
+	<td>잔액 : </td>
+	<td>${loginUser.stu_change }</td>
+</tr>
 </table>
-<div style="position:absolute; left:180px; bottom:40px">
-<img src="MacintoshHD/Users/ahn/Documents\QR코드.png" width=150px height=150px>
-</div>
+<br>
+<br>
+<br>
+
+<form method="post"  action="Foruse.do">
+<input type= "submit" value ="사용">
+
+
+</form>
+<!-- <div style="position:absolute; left:180px; bottom:40px"> -->
+<!-- <img src="MacintoshHD/Users/ahn/Documents\QR코드.png" width=150px height=150px> -->
+
 </body>
 </html>

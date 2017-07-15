@@ -1,34 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:if test="${empty loginUser}">
+	<jsp:forward page='Login.do' />
+</c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Recharge page</title>
+<title>충전 페이지</title>
 </head>
 <body>
+
+
 <form method="post" action="loginsuccess.jsp">
-<input type="submit" value="뒤로"></form>
-<div style="position:absolute; top:200px; right:315px"><input type="submit" value="충전하기"></div>
-<table cellpadding="10px" style="position:relative; left:100px; top:50px;">
+<input type="submit" value="뒤로">
+</form>
+<form method="post" action="Recharge.do">
+<br>
+<br>
+<br>
+<br>
+<%-- <% session.getAttribute("stu_id");%> --%>
+<table>
 	<tr>
-		<td><input type="radio" name="price" value="1000원">1000원</td>
+		<td>충전 가격</td>
+		<td><input type="text" name="recharge_mn" value="" size=" "></td>
 	</tr>
-	<tr>
-		<td><input type="radio" name="price" value="2000원">2000원</td>
-	</tr>
-	<tr>
-		<td><input type="radio" name="price" value="3000원">3000원</td>
-	</tr>
-	<tr>
-		<td><input type="radio" name="price" value="3500원">3500원</td>
-	</tr>
-	<tr>
-		<td><input type="radio" name="price" value="5000원">5000원</td>
-	</tr>
-	<tr>
-		<td><input type="radio" name="price" value="10000원">10000원</td>
-	</tr>
+	
 </table>
+
+	
+<%-- <h1>${loginUser.stu_id}</h1> --%>
+<%-- <input type="text" name=${loginUser.stu_id} value='${stu_id}'></h1> --%>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<input type= "submit" value = "등록">
+
+</form>
 </body>
 </html>

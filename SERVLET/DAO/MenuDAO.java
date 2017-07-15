@@ -47,54 +47,11 @@ public class MenuDAO {
 		return conn;
 	}
 	
-public List<MenuVO> selectAllMonthMenu(){
-		
-		String sql ="select * from menu order by mn_date ";
-		List<MenuVO> list = new ArrayList<MenuVO>();
-		
-		Connection conn =null;
-		PreparedStatement pstmt = null;
-		ResultSet rs =null;
-		//ResultSet rc =null;
-		getCalender gc = new getCalender();
-		//getdate
-		Date d = new Date();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		String a = df.format(d);
-	
-		try{
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			
-			while(rs.next()) {
-						MenuVO mVo = new MenuVO();
-						
-						mVo.setMn_date(rs.getString("mn_date"));
-						mVo.setChain(rs.getString("chain"));
-						mVo.setMn_type(rs.getString("mn_type"));
-						mVo.setMn_name(rs.getString("mn_name"));
-						mVo.setMn_price(rs.getInt("mn_price"));
-						list.add(mVo); // Arraylist에 객체 추가
-				
-				} // while문 끝
-		} catch(Exception e ){
-			e.printStackTrace();
-		} finally {
-			try{
-				if (rs != null) rs.close();
-				if (pstmt != null) pstmt.close();
-				if (conn != null) conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-}
+
 	//인성관일일메뉴(메인화면)
 	public List<MenuVO> selectInSungMenu(){
 		
-		String sql ="select * from menu order by mn_date ";
+		String sql ="select * from menu";
 		List<MenuVO> list = new ArrayList<MenuVO>();
 		
 		Connection conn =null;
@@ -148,7 +105,7 @@ public List<MenuVO> selectAllMonthMenu(){
 	public List<MenuVO> selectHwanMenu(){
 		
 		String sql ="select * from menu";
-		List<MenuVO> list = new ArrayList<MenuVO>();
+		List<MenuVO> list= new ArrayList<MenuVO>();
 		
 		Connection conn =null;
 		PreparedStatement pstmt = null;
@@ -193,12 +150,12 @@ public List<MenuVO> selectAllMonthMenu(){
 		return list;
 				
 	}	
-	
+
 	
 	//기숙사일일메뉴
 	public List<MenuVO> selectDormMenu(){
 		
-		String sql ="select * from menu order by mn_date ";
+		String sql ="select * from menu";
 		List<MenuVO> list = new ArrayList<MenuVO>();
 		
 		Connection conn =null;
@@ -217,7 +174,7 @@ public List<MenuVO> selectAllMonthMenu(){
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
-					if(rs.getString("chain").equals("기숙사")&&rs.getString("mn_date").equals(gc.cc()))
+					if(rs.getString("chain").equals("생활관")&&rs.getString("mn_date").equals(gc.cc()))
 					{
 						MenuVO mVo = new MenuVO();
 						
@@ -229,6 +186,7 @@ public List<MenuVO> selectAllMonthMenu(){
 						list.add(mVo); // Arraylist에 객체 추가
 					}
 				} // while문 끝
+			
 		} catch(Exception e ){
 			e.printStackTrace();
 		} finally {
@@ -241,8 +199,48 @@ public List<MenuVO> selectAllMonthMenu(){
 			}
 		}
 		return list;
-				
-	}	
+			
+	}
+	public List<MenuVO> selectWeekMenu(){
+		
+		String sql ="select * from menu";
+		List<MenuVO> list = new ArrayList<MenuVO>();
+		
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+	
+		try{
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+					{
+						MenuVO mVo = new MenuVO();
+						
+						mVo.setMn_date(rs.getString("mn_date"));
+						mVo.setChain(rs.getString("chain"));
+						mVo.setMn_type(rs.getString("mn_type"));
+						mVo.setMn_name(rs.getString("mn_name"));
+						mVo.setMn_price(rs.getInt("mn_price"));
+						list.add(mVo); // Arraylist에 객체 추가
+					}
+				} // while문 끝
+			
+		} catch(Exception e ){
+			e.printStackTrace();
+		} finally {
+			try{
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+				if (conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }
 
 	

@@ -36,36 +36,25 @@ private static final long serialVersionUID=1L;
 	 */
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("menu.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("menu_session.jsp");
 		dispatcher.forward(request,response);
 		
 	}
 	
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String url = "menuweek.jsp";
-		//String url1= "menu1.jsp";
-	/*	String mn_date = request.getParameter("mn_date");
-		String mn_name = request.getParameter("mn_name");
-		int mn_price = Integer.parseInt(request.getParameter("mn_price"));
-		String chain = request.getParameter("chain");
-		String mn_type= request.getParameter("mn_type");
-		
-		MenuDAO mDao = MenuDAO.getInstance();
-		int result = mDao.dateCheck(mn_date);
-		*/
+		String url2 = "admin_Menu_Week.jsp";
+
 		MenuWeekDAO mDao = MenuWeekDAO.getInstance();
 		List<MenuWeekVo> menuWeekList = mDao.selectWeekMenu();
 		request.setAttribute("menuWeekList", menuWeekList);
 		
 	RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 	dispatcher.forward(request, response);
-	
-	
 	
 		}
 

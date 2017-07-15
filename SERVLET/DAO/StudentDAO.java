@@ -1,4 +1,4 @@
-package final_Project_Dao;
+ package final_Project_Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,8 @@ import javax.sql.DataSource;
 import final_Project_Vo.StudentVO;
 
 public class StudentDAO {
-	private StudentDAO(){
+	
+	public StudentDAO(){
 		
 	}
 	
@@ -31,6 +32,15 @@ public class StudentDAO {
 		return conn;
 	}
 	
+//public String bb(){
+//		
+//		StudentVO sVo = new StudentVO();
+//		String b= sVo.getStu_id();
+//		
+//		
+//		return b;
+//	}
+	
 	//Using check user
 	public int userCheck(String stu_id, String stu_pw){
 		int result = -1;
@@ -38,6 +48,8 @@ public class StudentDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		 
 		
 		try{
 				conn = getConnection();
@@ -74,19 +86,22 @@ public class StudentDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		try{
+		
+		try{ 
 			conn = getConnection();
 			pstmt= conn.prepareStatement(sql);
 			pstmt.setString(1, stu_id); 
 			rs=pstmt.executeQuery();
-			
+		
 			if(rs.next()){
 				mVo = new StudentVO();
 				mVo.setStu_id(rs.getString("stu_id"));
 				mVo.setStu_name(rs.getString("stu_name"));
 				mVo.setStu_change(rs.getString("stu_change"));
 				mVo.setStu_pw(rs.getString("stu_pw"));
+				
 			}
+			
 		} catch(Exception e){
 			e.printStackTrace();}
 		finally{
@@ -99,7 +114,15 @@ public class StudentDAO {
 				e.printStackTrace();
 			}
 		}
-		return mVo;	
+		return mVo ;	
+		
 	}
 	
-}
+	
+	
+	
+
+		// TODO Auto-generated method stub
+		
+	}
+	

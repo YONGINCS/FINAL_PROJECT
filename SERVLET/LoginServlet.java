@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import final_Project_Dao.ForuseDAO;
 import final_Project_Dao.StudentDAO;
 import final_Project_Vo.StudentVO;
 
@@ -33,8 +34,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Mainpage.jsp");
-		dispatcher.forward(request,response);
+		
 	}
 	
 	/**
@@ -51,18 +51,26 @@ public class LoginServlet extends HttpServlet {
 		StudentDAO mDao = StudentDAO.getInstance();
 		int result = mDao.userCheck(stu_id, stu_pw);
 		
+		
 		if(result==1){
+			
 			StudentVO mVo = mDao.getMember(stu_id);
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser",mVo);
+			//
+			session.setAttribute("stu_id",mVo.getStu_id());
+			session.setAttribute("loginUser", mVo);
+			session.setAttribute("loginUser1", stu_id);
+			//session.setAttribute("loginUser2",mVo);
 			url="loginsuccess.jsp";
 		}else if(result ==0)
 		{ request.setAttribute("message", "암호가 맞지 않습니다.");
 		}else if(result ==-1)
 		{ request.setAttribute("message", "존재하지 않는 학번입니다.");
 		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}
 
+	
 }
